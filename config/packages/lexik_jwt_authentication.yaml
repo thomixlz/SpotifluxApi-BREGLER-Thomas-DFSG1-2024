@@ -1,0 +1,10 @@
+lexik_jwt_authentication:
+    # Clé secrète utilisée pour signer les tokens JWT
+    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+
+    # Chemin vers la clé publique utilisée pour vérifier les tokens JWT (utilisé uniquement si vous utilisez la vérification asymétrique)
+    public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
+
+    # Phrase secrète utilisée pour chiffrer les tokens JWT (utilisé uniquement si vous utilisez la vérification asymétrique)
+    pass_phrase: '%env(JWT_PASSPHRASE)%'
+

@@ -1,0 +1,45 @@
+{# ============================================================================= 
+    📁 home.html.twig ▶ [ HOME PAGE ]
+
+    - 
+    💻 BREGLER Thomas © 2024 
+   ============================================================================= #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}BREGLER Thomas - Template{% endblock %}
+
+{% block body %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex flex-column text-center">
+                <h1>🚀 BREGLER Thomas - Template 🚀</h1>
+                <p>
+                    {% if app.user %}
+                        Mode ADMIN
+
+                        <div class="d-flex justify-content-between pt-5 mt-5">
+                            <button type="button" class="btn btn-success">
+                                <a class="mt-4" style="color:white!important;text-decoration:none;"href="{{ path('app_track_index') }}">Gestion Track</a>
+                            </button>
+                            <button type="button" class="btn btn-success">
+                                <a class="mt-4" style="color:white!important;text-decoration:none;"href="{{ path('app_album_index') }}">Gestion Album</a>
+                            </button>
+                             <button type="button" class="btn btn-success">
+                                <a class="mt-4" style="color:white!important;text-decoration:none;"href="{{ path('app_artist_index') }}">Gestion Artiste</a>
+                            </button>
+                            
+                        </div>
+
+                    {% else %}
+                        Mode UTILISATEUR
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

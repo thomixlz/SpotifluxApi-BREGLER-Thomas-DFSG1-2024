@@ -1,0 +1,22 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Track{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 pt-5 pb-3">
+            <a href="{{ path('app_track_index') }}"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="col-12 ">
+            <h1>Edit Track</h1>
+            <div class="hr-big"></div>
+        </div>
+    </div>
+</div>
+
+    {{ include('track/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}
+

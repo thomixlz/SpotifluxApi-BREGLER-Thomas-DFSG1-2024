@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Artist{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-5 pb-3">
+                <a href="{{ path('app_artist_index') }}"><i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+            <div class="col-12 ">
+                <h1>Edit Artist</h1>
+                <div class="hr-big"></div>
+            </div>
+        </div>
+    </div>
+
+    {{ include('artist/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+{% endblock %}

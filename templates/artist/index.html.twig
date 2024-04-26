@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artist index{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row">
+         <div class="col-12 pt-2 pb-5">
+            <a href="{{ path('app_home') }}"><i class="fa-solid fa-house"></i> </a>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-between  ">
+                <h1 class="">- Manage Artist <i class="fa-solid fa-user"></i> -</h1>
+                <a class=" btn-plus noDeco"href="{{ path('app_artist_new') }}" > <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="hr-big"></div>
+
+            <div class="d-flex">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Search</span>
+                    </div>
+                    <input type="text" class="pl-2 pr-2" id="searchInput" name="search"  placeholder="...">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <p>Total : {{totalArtist|raw}} Artist(s)</p>
+            </div>
+
+
+                  <table class="table custom-table" id="table">
+                    <thead class="thead-dark" >
+                        <tr>
+                            <th>Name</th>
+                            <th class="d-flex justify-content-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for artist in artists %}
+                        <tr>
+                            <td>{{ artist.name|raw }}</td>
+                            <td class="d-flex justify-content-center">
+
+                                <form method="post" action="{{ path('app_artist_delete', {'id': artist.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </form>
+
+                                <button class="btn btn-warning ml-2"><a class="btn-edit noDeco" href="{{ path('app_artist_edit', {'id': artist.id}) }}"><i class="fa-solid fa-pen"></i> Edit</button></a>
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No artist found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+
+        </div>
+    </div>
+</div>
+    
+
+<script>
+    let boutonRecherche = document.getElementById('searchInput');
+    let tableau = document.getElementById('table');
+    let lignes = tableau.getElementsByTagName('tr');
+
+    boutonRecherche.addEventListener('input', function () {
+        let valueInputRecherche = boutonRecherche.value.toLowerCase();
+        for (let i = 1; i < lignes.length; i++) {
+            let row = lignes[i];
+            let columns = row.getElementsByTagName('td');
+            let found = false;
+            let albumName = columns[0].textContent.toLowerCase(); // Récupérer le nom de l'album dans la première colonne
+            if (albumName.includes(valueInputRecherche)) {
+                found = true;
+            }
+            if (found) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+</script>
+
+{% endblock %}
